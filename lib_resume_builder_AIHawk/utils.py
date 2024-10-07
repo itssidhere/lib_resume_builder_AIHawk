@@ -16,7 +16,7 @@ def create_driver_selenium():
     if not os.path.exists(chromedriver_path):
         raise FileNotFoundError(f"ChromeDriver not found at {chromedriver_path}")
 
-    service = Service(executable_path=chromedriver_path)
+    service = ChromeService(executable_path=chromedriver_path)
     return webdriver.Chrome(service=service, options=options)
 
 def HTML_to_PDF(FilePath):
