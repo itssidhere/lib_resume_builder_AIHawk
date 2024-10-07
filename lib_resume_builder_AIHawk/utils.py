@@ -7,14 +7,15 @@ import time
 from webdriver_manager.chrome import ChromeDriverManager
 
 def create_driver_selenium():
-    options = get_chrome_browser_options()  # Usa il metodo corretto per ottenere le opzioni
-
-    chrome_install = ChromeDriverManager().install()
-    folder = os.path.dirname(chrome_install)
-    chromedriver_path = os.path.join(folder, "chromedriver.exe")
-
-
-    service = ChromeService(executable_path=chromedriver_path)
+    options = webdriver.ChromeOptions()
+    options.add_argument('--headless')
+    options.add_argument('--no-sandbox')
+    options.add_argument('--disable-dev-shm-usage')
+    
+    chromedriver_path = '/opt/homebrew/Caskroom/chromedriver/129.0.6668.89/chromedriver-mac-arm64/chromedriver'
+    service = Service(chromedriver_path)
+    
+    return webdriver.Chrome(service=service, options=options)
     return webdriver.Chrome(service=service, options=options)
 
 def HTML_to_PDF(FilePath):
